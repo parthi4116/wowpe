@@ -64,6 +64,8 @@ A simple UPI wallet simulation built with **Angular 16**, allowing users to add 
    npm start
 
 ##Login Screen
+![Uploading ProjectManagementApplication (29.10.2025 12_09) (1).png…]()
+
 ![image](https://github.com/user-attachments/assets/34b3acd5-7292-4f4e-aff3-59332e094a0a)
 ##Tranaction listing page
 ![image](https://github.com/user-attachments/assets/132ab2e8-5d8c-4267-858b-10c4e12b13ad)
