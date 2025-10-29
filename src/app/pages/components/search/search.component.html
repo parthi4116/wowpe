@@ -1,0 +1,16 @@
+<div class="filter-section">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="🔍 Search by UPI ID"
+    [(ngModel)]="searchText"
+    (input)="applyFilters()"
+  />
+
+  <input
+    type="date"
+    class="form-control ms-2"
+    [(ngModel)]="filterDate"
+    (change)="applyFilters()"
+  />
+</div>

@@ -1,0 +1,18 @@
+.filter-section {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: #55b6ff;
+      box-shadow: 0 0 4px rgba(85, 182, 255, 0.4);
+      outline: none;
+    }
+  }
+}

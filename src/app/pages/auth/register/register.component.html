@@ -1,0 +1,106 @@
+<div class="content-center vh-100">
+  <div class="auth-container">
+    <!-- LEFT SIDE (Gradient Sidebar) -->
+    <div class="auth-left content-center flex-column text-center text-white">
+      <div class="logo-box content-center fs-1 fw-bold mb-3">W</div>
+      <h2 class="fw-normal">Wowpe</h2>
+      <p class="fs-6 opacity-75">Join us — we made it for you</p>
+    </div>
+
+    <!-- RIGHT SIDE (Register Form) -->
+    <div class="auth-right content-center bg-white">
+      <div class="authform w-100 px-4">
+        <div class="container mt-3">
+          <div class="fs-3 fw-semibold text-dark mb-3">Create an Account</div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="p-4 pt-0">
+            <ng-container *ngIf="!slideCheck">
+              <!-- Name -->
+              <div class="mb-3">
+                <label for="name" class="form-label text-dark">Name</label>
+                <input id="name" formControlName="name" class="form-control"
+                  [class.is-invalid]="submitted && registerForm.get('name')?.invalid" />
+                <div class="invalid-feedback" *ngIf="registerForm.get('name')?.hasError('required')">
+                  Name is required.
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label text-dark">Email</label>
+                <input id="email" formControlName="email" type="email" class="form-control"
+                  [class.is-invalid]="submitted && registerForm.get('email')?.invalid" />
+                <div class="invalid-feedback" *ngIf="registerForm.get('email')?.errors">
+                  <div *ngIf="registerForm.get('email')?.hasError('required')">Email is required.</div>
+                  <div *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format.</div>
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="mb-3 position-relative">
+                <label for="password" class="form-label text-dark d-flex align-items-center">
+                  Password
+                  
+                  <span class=" cursor-pointer ms-2 material-symbols-outlined" matTooltip="Password must have at least 8 characters, 1 uppercase letter, 1 number, and 1 special character."
+                    matTooltipPosition="right"  >
+                    info
+                  </span>
+                  
+                </label>
+
+                <input type="password" id="password" class="form-control" formControlName="password"
+                  [class.is-invalid]="submitted && registerForm.get('password')?.invalid" />
+
+                <div class="invalid-feedback" *ngIf="submitted && registerForm.get('password')?.errors">
+                  <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+                  <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Minimum 8 characters.</div>
+                  <div *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                    Must include at least 1 uppercase letter, 1 number, and 1 special character.
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Mobile -->
+              <div class="mb-3">
+                <label for="mobile" class="form-label text-dark">Mobile</label>
+                <input id="mobile" formControlName="mobile" class="form-control"
+                  [class.is-invalid]="submitted && registerForm.get('mobile')?.invalid" />
+                <div class="invalid-feedback" *ngIf="registerForm.get('mobile')?.hasError('required')">
+                  Mobile number is required.
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="slideCheck">
+              <div class="text-center mt-4 p-3 w-1">
+                <p class="mb-3 fs-6 text-secondary">
+                  Would you like to add some money to your wallet now?<br />
+                  Click <span class="text-primary fw-semibold" style="cursor:pointer;" (click)="opendialog()">Yes</span>
+                  to proceed or
+                  <span class="text-danger fw-semibold" style="cursor:pointer;" (click)="onSubmit()">Skip for
+                    now</span>
+                  to continue.
+                </p>
+              </div>
+            </ng-container>
+
+            <!-- Buttons -->
+            <div class="text-left my-3 text-dark">
+              Already have an account?
+              <a routerLink="/login" class="text-primary" style="cursor:pointer;">Login here</a>
+            </div>
+
+            <div *ngIf="!slideCheck " class="text-center d-flex align-items-center">
+              <a (click)="slideMove()" class="btn btn-outline-primary border-radius-16">
+                Continue
+              </a>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

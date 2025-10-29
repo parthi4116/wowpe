@@ -1,0 +1,48 @@
+<div class="transaction-dialog">
+  <h2>Send Money</h2>
+
+  <form [formGroup]="transactionForm" (ngSubmit)="sendMoney()">
+    <div class="form-group">
+      <label>Recipient UPI ID</label>
+      <input
+        type="text"
+        formControlName="upiId"
+        placeholder="e.g. john@upi"
+      />
+      <div
+        class="error"
+        *ngIf="transactionForm.get('upiId')?.touched && transactionForm.get('upiId')?.invalid"
+      >
+        UPI ID is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Amount</label>
+      <input
+        type="number"
+        formControlName="amount"
+        placeholder="Enter amount"
+        min="1"
+      />
+      <div
+        class="error"
+        *ngIf="transactionForm.get('amount')?.touched && transactionForm.get('amount')?.invalid"
+      >
+        Amount must be greater than 0.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Notes (optional)</label>
+      <textarea rows="3" formControlName="notes" placeholder="Enter notes"></textarea>
+    </div>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn-cancel" (click)="close()">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="transactionForm.invalid">
+        Send
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+.auth-container {
+  display: flex;
+  width: 900px;
+  max-width: 95%;
+  height: 520px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Left blue gradient panel */
+.auth-left {
+  background: linear-gradient(135deg, #2af785, #55b6ff);
+}
+
+.logo-box {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.form-wrapper {
+  width: 80%;
+  max-width: 340px;
+}
+
+

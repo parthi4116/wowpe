@@ -1,0 +1,16 @@
+<div class="card p-4">
+
+  <div class="card-header bg-white">
+    <h5 class="card-title text-center">{{message?.header |titleCase}}</h5>
+  </div>
+
+  <div class="card-body bg-white">
+    <p class="card-text">{{message?.content |titleCase}}</p>
+  </div>
+
+  <div class=" card-footer bg-white mt-4 d-flex justify-content-end align-items-center">
+    <button class="btn btn-danger me-2" (click)="cancel()">No</button>
+    <button class="btn btn-primary" (click)="yes()">Yes</button>
+  </div>
+
+</div>

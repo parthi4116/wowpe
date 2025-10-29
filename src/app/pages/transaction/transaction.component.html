@@ -1,0 +1,124 @@
+<div class="wallet-container">
+  <!-- Wallet Balance and Actions -->
+  <div class="wallet-balance-card">
+    <div class="balance-text">
+      Wallet Balance: <span class="amount">₹{{ currentAmount }}</span>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-danger" (click)="addmoney()">Add Balance</button>
+      <button class="btn btn-primary" (click)="openTransactionForm()">New Transaction</button>
+    </div>
+  </div>
+
+  <div class="transaction-section">
+    <div class="header-bar">
+      <div class="fs-4">Transaction History</div>
+      <div class="d-flex align-items-center flex-row">
+      <app-search (filtersChanged)="onFiltersChanged($event)"></app-search>
+      <div class="toggle-bar">
+        <button class="toggle-btn" [class.active]="viewMode==='list'" (click)="viewMode='list'" aria-label="List View"
+          title="List View">
+          <!-- List icon SVG -->
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="5" width="14" height="2" rx="1" fill="currentColor" />
+            <rect x="3" y="9" width="14" height="2" rx="1" fill="currentColor" />
+            <rect x="3" y="13" width="14" height="2" rx="1" fill="currentColor" />
+          </svg>
+        </button>
+        <button class="toggle-btn" [class.active]="viewMode==='card'" (click)="viewMode='card'" aria-label="Card View"
+          title="Card View">
+          <!-- Card/grid icon SVG -->
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="5" width="5" height="5" rx="1" fill="currentColor" />
+            <rect x="12" y="5" width="5" height="5" rx="1" fill="currentColor" />
+            <rect x="3" y="12" width="5" height="5" rx="1" fill="currentColor" />
+            <rect x="12" y="12" width="5" height="5" rx="1" fill="currentColor" />
+          </svg>
+        </button>
+      </div></div>
+
+    </div>
+  </div>
+  <!-- List View -->
+  <div class="transaction-section" *ngIf="viewMode==='list'">
+
+
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Recipient UPI ID</th>
+          <th>Amount</th>
+          <th>Notes</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of filteredTransactions">
+          <td>{{ list?.date | date: 'short' }}</td>
+          <td>{{ list?.upiId }}</td>
+          <td class="amount-cell" [ngClass]="list?.type">
+            {{ list?.type === 'debit' ? '-' : '+' }} ₹{{ list?.amount }}
+          </td>
+          <td class="truncate-text" [title]="list?.notes">
+            {{ list?.notes?.length > 20 ? (list?.notes | slice:0:20) + '...' : list?.notes }}
+          </td>
+          <td>
+            <span class="badge" [class.bg-success]="list?.status==='success'"
+              [class.bg-danger]="list?.status==='failed'">
+              {{ list?.status | titleCase }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="filteredTransactions.length === 0">
+          <td colspan="5" class="no-data">No transactions found</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="app-pagination">
+      <app-pagination [totalItems]="filteredTransactions.length" [pageSize]="pageSize" [currentPage]="currentPage"
+        (pageChanged)="onPageChange($event)">
+      </app-pagination>
+    </div>
+  </div>
+
+  <!-- Card View -->
+  <div class="transaction-cards-view" *ngIf="viewMode==='card'">
+    <div class="transaction-cards">
+      <div class="transaction-card" *ngFor="let list of filteredTransactions">
+        <div class="card-row">
+          <div class="card-label">Date:</div>
+          <div>{{ list?.date | date: 'short' }}</div>
+        </div>
+        <div class="card-row">
+          <div class="card-label">Recipient:</div>
+          <div>{{ list?.upiId }}</div>
+        </div>
+        <div class="card-row">
+          <div class="card-label">Amount:</div>
+          <div [ngClass]="{'text-danger': list?.type==='debit', 'text-success': list?.type!=='debit'}">
+            {{ list?.type==='debit' ? '-' : '+' }} ₹{{ list?.amount }}
+          </div>
+        </div>
+        <div class="card-row">
+          <div class="card-label">Notes:</div>
+          <div class="truncate-text" [title]="list?.notes">
+            {{ list?.notes?.length > 40 ? (list?.notes | slice:0:40) + '...' : list?.notes }}
+          </div>
+        </div>
+        <div class="card-row">
+          <div class="card-label">Status:</div>
+          <span class="badge" [class.bg-success]="list?.status==='success'" [class.bg-danger]="list?.status==='failed'">
+            {{ list?.status | titleCase }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="app-pagination">
+      <app-pagination [totalItems]="filteredTransactions.length" [pageSize]="pageSize" [currentPage]="currentPage"
+        (pageChanged)="onPageChange($event)">
+      </app-pagination>
+    </div>
+  </div>
+</div>

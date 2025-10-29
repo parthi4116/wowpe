@@ -1,0 +1,29 @@
+<div class="  d-flex justify-content-center align-items-center">
+  <div class="add-money-card p-4 shadow-lg rounded-4 text-center">
+    <h3 class="mb-3 text-primary fw-bold">Add Money</h3>
+    <p class="text-muted mb-4">Add funds to your wallet and continue.</p>
+
+    <form [formGroup]="addMoneyForm" (ngSubmit)="onSubmit()">
+      <!-- Amount -->
+      <div class="mb-3 text-start">
+        <label for="amount" class="form-label">Enter Amount</label>
+        <input
+          id="amount"
+          type="number"
+          class="form-control"
+          placeholder="₹ Enter amount"
+          formControlName="amount"
+          [class.is-invalid]="submitted && addMoneyForm.get('amount')?.invalid"
+        />
+        <div class="invalid-feedback" *ngIf="addMoneyForm.get('amount')?.hasError('required')">
+          Amount is required.
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary w-100 rounded-pill mt-3">Add Money</button>
+
+      
+    </form>
+  </div>
+</div>

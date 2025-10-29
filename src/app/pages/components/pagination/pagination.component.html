@@ -1,0 +1,15 @@
+<nav *ngIf="totalItems != 0" aria-label="Pagination">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="prevPage()">Previous</button>
+    </li>
+
+    <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+      <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+    </li>
+
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="nextPage()">Next</button>
+    </li>
+  </ul>
+</nav>

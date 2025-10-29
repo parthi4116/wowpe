@@ -1,0 +1,42 @@
+<div class="content-center vh-100 ">
+  <div class=" auth-container">
+    <div class=" order-1 auth-left flex-fill content-center position-realtive text-center flex-column text-white">
+      <div class="logo-box content-center fs-1 fw-bold mb-3  ">W</div>
+      <h2 class="fw-normal">Wowpe</h2>
+      <p class="fs-6 opacity-75">We made it for you</p>
+    </div>
+
+     <div class="flex-grow-1 content-center bg-white auth-right order-2">
+      <div class="form-wrapper">
+        <h2 class="welcome">Welcome</h2>
+        <p class="subtitle">Login in to your account to continue</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder="Email"
+              formControlName="email"
+              [class.is-invalid]="submitted && loginForm.get('email')?.invalid"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              formControlName="password"
+              [class.is-invalid]="submitted && loginForm.get('password')?.invalid"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 border-radius-16">LOG IN</button>
+
+          <div class="signup-link pt-3">
+            Don’t have an account? <a routerLink="/register">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
